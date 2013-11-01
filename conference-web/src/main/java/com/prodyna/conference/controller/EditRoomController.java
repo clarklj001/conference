@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.faces.convert.Converter;
 import javax.inject.Inject;
@@ -21,6 +22,7 @@ public class EditRoomController {
 
 	Room room;
 
+	@PostConstruct
 	void postConstruct() {
 		room = new Room();
 	}
@@ -55,6 +57,7 @@ public class EditRoomController {
 
 	public void doDelete() {
 		roomService.delete(room);
+		room.setId(null);
 	}
 
 	public String doNew() {

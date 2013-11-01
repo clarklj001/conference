@@ -66,6 +66,7 @@ public class EditSpeakerController {
 
 	public void doDelete() {
 		speakerService.delete(speaker);
+		speaker.setId(null);
 	}
 
 	public List<Talk> getTalks() {
