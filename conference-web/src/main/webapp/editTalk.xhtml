@@ -10,6 +10,9 @@
 	</ui:define>
 	<ui:define name="content">
 		<h:form id="edittalk">
+			<f:metadata>
+				<f:viewParam name="id" value="#{editTalkController.talk}" converter="#{editTalkController.idConverter}"></f:viewParam>
+			</f:metadata>
 			<custom:inputnamekurzbeschreibung model="#{editTalkController.talk}"></custom:inputnamekurzbeschreibung>
 			<h:inputHidden value="#{editTalkController.talk.conference.id}" />
 			<h:outputLabel for="room" value="Room" />

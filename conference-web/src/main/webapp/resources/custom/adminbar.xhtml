@@ -13,11 +13,11 @@
 <!-- IMPLEMENTATION -->
 <composite:implementation>
 	<h:form id="adminbar">
-		<h:commandLink action="index?faces-redirect=true" value="Home"/>
-		<h:commandLink action="rooms?faces-redirect=true" value="Rooms"/>
-		<h:commandLink action="speakers?faces-redirect=true" value="Speakers"/>
+		<h:link outcome="index" value="Home"/>
+		<h:link outcome="rooms" value="Rooms"/>
+		<h:link outcome="speakers" value="Speakers"/>
 		
-		<h:commandLink action="login?faces-redirect=true" rendered="#{!securityController.loggedIn}"
+		<h:link outcome="login" rendered="#{!securityController.loggedIn}"
 			value="Login" />
 		<h:commandLink action="#{securityController.tryLogout()}"
 			rendered="#{securityController.loggedIn}" value="Logout" />

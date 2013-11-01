@@ -16,15 +16,12 @@
 				<h:column>
 					<f:facet name="header">
 					</f:facet>
-					<custom:editdelete model="#{editConferenceController}"
-						object="#{conference}"></custom:editdelete>
 				</h:column>
 				<h:column>
 					<f:facet name="header">Name</f:facet>
-					<h:commandLink
-						action="#{editConferenceController.doEdit(conference)}"
-						value="(->) #{conference.name}" immediate="true">
-					</h:commandLink>
+					<h:link outcome="editConference" value="(->) #{conference.name}" styleClass="edit">
+						<f:param name="id" value="#{conference.id}"></f:param>
+					</h:link>
 				</h:column>
 				<h:column>
 					<f:facet name="header">Kurzbeschreibung</f:facet>

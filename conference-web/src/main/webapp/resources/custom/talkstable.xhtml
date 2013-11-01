@@ -20,15 +20,9 @@
 <composite:implementation>
 	<h:dataTable var="talk" value="#{cc.attrs.value}">
 		<h:column>
-			<h:commandButton action="#{editTalkController.doEdit(talk.id)}" value="Edit"
-				rendered="#{securityController.loggedIn}">
-				<f:setPropertyActionListener
-					target="#{editConferenceController.conference.id}"
-					value="#{editConferenceController.conference.id}" />
-			</h:commandButton>
-		</h:column>
-		<h:column>
-			<h:outputText value="#{talk.name}" />
+			<h:link outcome="editTalk" value="(->) #{talk.name}" styleClass="edit">
+				<f:param name="id" value="#{talk.id}"></f:param>
+			</h:link>
 		</h:column>
 		<h:column>
 			<h:outputText value="#{talk.kurzBeschreibung}" />

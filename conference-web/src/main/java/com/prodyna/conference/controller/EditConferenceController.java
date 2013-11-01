@@ -7,9 +7,11 @@ import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.convert.Converter;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.prodyna.conference.converter.ConferenceIdConverter;
 import com.prodyna.conference.model.Conference;
 import com.prodyna.conference.model.Talk;
 import com.prodyna.conference.service.ConferenceService;
@@ -92,6 +94,10 @@ public class EditConferenceController implements Serializable {
 		Long id = getConference().getId();
 		boolean b = id != null && id != 0;
 		return b;
+	}
+
+	public Converter getIdConverter() {
+		return new ConferenceIdConverter(conferenceService);
 	}
 
 }

@@ -11,6 +11,9 @@
 	</ui:define>
 	<ui:define name="content">
 		<h:form id="editconference">
+			<f:metadata>
+				<f:viewParam name="id" value="#{editConferenceController.conference}" converter="#{editConferenceController.idConverter}"></f:viewParam>
+			</f:metadata>
 			<h1>Conference</h1>
 			<custom:inputnamekurzbeschreibung
 				model="#{editConferenceController.conference}"></custom:inputnamekurzbeschreibung>

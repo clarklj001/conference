@@ -5,10 +5,13 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.faces.component.UISelectOne;
+import javax.faces.convert.Converter;
 import javax.inject.Inject;
 
+import com.prodyna.conference.converter.TalkIdConverter;
 import com.prodyna.conference.model.Conference;
 import com.prodyna.conference.model.Room;
 import com.prodyna.conference.model.Speaker;
@@ -28,11 +31,7 @@ public class EditTalkController implements Serializable {
 
 	private UISelectOne uiInputForEditId;
 
-	Talk talk = new Talk();
-	{
-		talk.setConference(new Conference());
-		talk.setSpeakers(new ArrayList<Speaker>());
-	}
+	Talk talk;
 
 	String editId;
 
@@ -48,8 +47,19 @@ public class EditTalkController implements Serializable {
 	@Inject
 	ConferenceService conferenceService;
 
+	@PostConstruct
+	void postConstruct() {
+		talk = new Talk();
+		talk.setConference(new Conference());
+		talk.setSpeakers(new ArrayList<Speaker>());
+	}
+
 	public Talk getTalk() {
 		return talk;
+	}
+
+	public void setTalk(Talk talk) {
+		this.talk = talk;
 	}
 
 	public List<String> getSpeakerIds() {
@@ -140,6 +150,10 @@ public class EditTalkController implements Serializable {
 
 	public void setUiInputForEditId(UISelectOne uiInputForEditId) {
 		this.uiInputForEditId = uiInputForEditId;
+	}
+
+	public Converter getIdConverter() {
+		return new TalkIdConverter(talkService);
 	}
 
 }
