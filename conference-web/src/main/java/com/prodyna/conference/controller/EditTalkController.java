@@ -101,6 +101,10 @@ public class EditTalkController implements Serializable {
 		talk = talkService.update(talk);
 	}
 
+	public void doDelete() {
+		talkService.delete(talk);
+	}
+
 	/*
 	 * public String doEdit(Long id) { if (id != null && id != 0) { this.talk =
 	 * talkService.read(id); } return "editTalk"; }

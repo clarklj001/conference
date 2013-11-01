@@ -11,18 +11,17 @@
 	displayName="Edit Fields for Name and Kurzbeschreibung"
 	shortDescription="Login and logout actions">
 	<composite:attribute name="model"></composite:attribute>
-	<composite:attribute name="object"></composite:attribute>
 </composite:interface>
 
 <!-- IMPLEMENTATION -->
 <composite:implementation>
 	<h:commandButton
-		action="#{cc.attrs.model.doEdit(cc.attrs.object)}"
-		value="Edit" rendered="#{securityController.loggedIn}" immediate="true">
+		action="#{cc.attrs.model.doSave()}"
+		value="Save" rendered="#{securityController.loggedIn}">
 		</h:commandButton>
 	<h:commandButton
-		action="#{cc.attrs.model.doDelete(cc.attrs.object)}"
-		value="Delete" rendered="#{securityController.loggedIn}" immediate="true">
+		action="#{cc.attrs.model.doDelete()}"
+		value="Delete" rendered="#{securityController.loggedIn}">
 	</h:commandButton>
 </composite:implementation>
 </html>

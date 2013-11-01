@@ -64,6 +64,10 @@ public class EditSpeakerController {
 		speaker = speakerService.update(speaker);
 	}
 
+	public void doDelete() {
+		speakerService.delete(speaker);
+	}
+
 	public List<Talk> getTalks() {
 		List<Talk> talks;
 		Long id = getId();

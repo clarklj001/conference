@@ -22,7 +22,8 @@
 				<f:convertNumber groupingUsed="false" integerOnly="true"/>
 			</h:inputText>
 			<h:inputHidden value="#{editRoomController.id}" />
-			<h:commandButton action="#{editRoomController.doSave()}" value="Save" rendered="#{securityController.loggedIn}"/>
+			
+			<custom:commandSaveButton model="#{editRoomController}"/>
 			<h:messages />
 			
 			<ui:repeat var="date" value="#{editRoomController.dates}">

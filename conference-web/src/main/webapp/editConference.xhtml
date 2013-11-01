@@ -22,8 +22,7 @@
 				id="StartDatum"/>
 			<custom:inputDatetime label="Enddatum" value="#{editConferenceController.conference.endDatum}"
 				id="EndDatum"/>
-			<h:commandButton action="#{editConferenceController.doSave()}"
-				value="Speichern" rendered="#{securityController.loggedIn}"/>
+			<custom:commandSaveButton model="#{editConferenceController}"/>
 			
 			<ui:repeat var="date" value="#{editConferenceController.dates}">
 				<div>

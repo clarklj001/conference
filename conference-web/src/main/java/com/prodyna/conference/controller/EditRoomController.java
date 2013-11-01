@@ -53,6 +53,10 @@ public class EditRoomController {
 		room = roomService.update(room);
 	}
 
+	public void doDelete() {
+		roomService.delete(room);
+	}
+
 	public String doNew() {
 		setName("Raumname");
 		setCapazitaet(20);

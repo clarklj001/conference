@@ -29,8 +29,7 @@
 			<custom:inputDatetime label="StartDate" value="#{editTalkController.talk.startDate}" time="true"/>
 			<h:outputLabel for="dauer" value="Dauer [Minuten]" />
 			<h:inputText id="dauer" value="#{editTalkController.talk.dauer}" />
-			<h:commandButton action="#{editTalkController.doSave()}" value="Save" rendered="#{securityController.loggedIn}">
-			</h:commandButton>
+			<custom:commandSaveButton model="#{editTalkController}"/>
 			<h:messages />
 		</h:form>
 	</ui:define>
