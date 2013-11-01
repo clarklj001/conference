@@ -13,9 +13,6 @@
 			<h2>Rooms</h2>
 			<h:dataTable var="room" value="#{roomController.rooms}">
 				<h:column>
-					<custom:editdelete model="#{editRoomController}" object="#{room}"></custom:editdelete>
-				</h:column>
-				<h:column>
 					<custom:outputRoom room="#{room}"/>
 				</h:column>
 				<h:column>

@@ -30,7 +30,6 @@
 			<h:outputLabel for="dauer" value="Dauer [Minuten]" />
 			<h:inputText id="dauer" value="#{editTalkController.talk.dauer}" />
 			<h:commandButton action="#{editTalkController.doSave()}" value="Save" rendered="#{securityController.loggedIn}">
-				<f:param name="id" value="#{editTalkController.talk.id}"></f:param>
 			</h:commandButton>
 			<h:messages />
 		</h:form>

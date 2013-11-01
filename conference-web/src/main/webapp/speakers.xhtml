@@ -13,10 +13,6 @@
 			<h2>Speakers</h2>
 			<h:dataTable var="speaker" value="#{speakerController.speakers}">
 				<h:column>
-					<custom:editdelete model="#{editSpeakerController}"
-						object="#{speaker}"></custom:editdelete>
-				</h:column>
-				<h:column>
 					<custom:outputSpeaker speaker="#{speaker}"/>
 				</h:column>
 				<h:column>
