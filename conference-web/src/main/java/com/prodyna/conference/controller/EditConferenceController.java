@@ -11,7 +11,7 @@ import javax.faces.convert.Converter;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.prodyna.conference.converter.ConferenceIdConverter;
+import com.prodyna.conference.converter.GenericIdConverter;
 import com.prodyna.conference.model.Conference;
 import com.prodyna.conference.model.Talk;
 import com.prodyna.conference.service.ConferenceService;
@@ -97,7 +97,7 @@ public class EditConferenceController implements Serializable {
 	}
 
 	public Converter getIdConverter() {
-		return new ConferenceIdConverter(conferenceService);
+		return new GenericIdConverter<Conference>(conferenceService);
 	}
 
 }

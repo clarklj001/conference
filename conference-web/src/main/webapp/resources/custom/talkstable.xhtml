@@ -20,7 +20,8 @@
 <composite:implementation>
 	<h:dataTable var="talk" value="#{cc.attrs.value}">
 		<h:column>
-			<h:link outcome="editTalk" value="(->) #{talk.name}" styleClass="edit">
+			<h:link outcome="editTalk" value="(->) #{talk.name}"
+				styleClass="edit">
 				<f:param name="id" value="#{talk.id}"></f:param>
 			</h:link>
 		</h:column>
@@ -32,11 +33,11 @@
 		</h:column>
 		<h:column>
 			<ui:repeat var="speaker" value="#{talk.speakers}">
-				<h:outputText value="#{speaker.name} " />
+				<custom:outputSpeaker speaker="#{speaker}"/>
 			</ui:repeat>
 		</h:column>
 		<h:column>
-			<h:outputText value="#{talk.room.name} (#{talk.room.capazitaet})" />
+			<custom:outputRoom room="#{talk.room}"/>
 		</h:column>
 	</h:dataTable>
 </composite:implementation>

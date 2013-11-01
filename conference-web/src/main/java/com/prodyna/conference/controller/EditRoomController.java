@@ -5,8 +5,10 @@ import java.util.Date;
 import java.util.List;
 
 import javax.enterprise.inject.Model;
+import javax.faces.convert.Converter;
 import javax.inject.Inject;
 
+import com.prodyna.conference.converter.GenericIdConverter;
 import com.prodyna.conference.model.Room;
 import com.prodyna.conference.model.Talk;
 import com.prodyna.conference.service.RoomService;
@@ -17,7 +19,11 @@ public class EditRoomController {
 	@Inject
 	RoomService roomService;
 
-	Room room = new Room();
+	Room room;
+
+	void postConstruct() {
+		room = new Room();
+	}
 
 	public Long getId() {
 		return room.getId();
@@ -71,5 +77,17 @@ public class EditRoomController {
 
 	public List<Talk> getRoomTalks(Date d) {
 		return roomService.listRoomTalksAtDate(room, d);
+	}
+
+	public Converter getIdConverter() {
+		return new GenericIdConverter<Room>(roomService);
+	}
+
+	public Room getRoom() {
+		return room;
+	}
+
+	public void setRoom(Room room) {
+		this.room = room;
 	}
 }

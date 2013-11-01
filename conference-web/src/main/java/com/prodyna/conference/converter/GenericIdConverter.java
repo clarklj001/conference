@@ -10,12 +10,15 @@ import javax.faces.convert.Converter;
 import com.prodyna.conference.model.IdHolder;
 import com.prodyna.conference.service.GenericCrudService;
 
-public abstract class AbstractIdConverter<L extends IdHolder> implements
-		Converter {
+public class GenericIdConverter<L extends IdHolder> implements Converter {
 
 	GenericCrudService<L> crudService;
 
 	Logger logger = Logger.getLogger("AbstractIdConverter");
+
+	public GenericIdConverter(GenericCrudService<L> crudService) {
+		this.crudService = crudService;
+	}
 
 	@Override
 	public L getAsObject(FacesContext arg0, UIComponent arg1, String arg2) {

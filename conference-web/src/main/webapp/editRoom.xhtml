@@ -10,6 +10,9 @@
 	</ui:define>
 	<ui:define name="content">
 		<h:form id="editroom">
+			<f:metadata>
+				<f:viewParam name="id" value="#{editRoomController.room}" converter="#{editRoomController.idConverter}"></f:viewParam>
+			</f:metadata>
 			<h:outputLabel value="Name" for="Name" />
 			<h:inputText value="#{editRoomController.name}"
 				id="Name" />

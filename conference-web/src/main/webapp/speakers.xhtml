@@ -17,7 +17,7 @@
 						object="#{speaker}"></custom:editdelete>
 				</h:column>
 				<h:column>
-					<h:commandLink action="#{editSpeakerController.doEdit(speaker)}" value="-> #{speaker.name}" />
+					<custom:outputSpeaker speaker="#{speaker}"/>
 				</h:column>
 				<h:column>
 					<h:outputText value="#{speaker.kurzBeschreibung}" />

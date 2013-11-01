@@ -11,7 +11,7 @@ import javax.faces.component.UISelectOne;
 import javax.faces.convert.Converter;
 import javax.inject.Inject;
 
-import com.prodyna.conference.converter.TalkIdConverter;
+import com.prodyna.conference.converter.GenericIdConverter;
 import com.prodyna.conference.model.Conference;
 import com.prodyna.conference.model.Room;
 import com.prodyna.conference.model.Speaker;
@@ -133,7 +133,7 @@ public class EditTalkController implements Serializable {
 			this.editId = id;
 			talk = talkService.read(Long.valueOf(id));
 		}
-		return "editTalk";
+		return "editTalk?faces-redirect=true";
 	}
 
 	public String getEditId() {
@@ -153,7 +153,7 @@ public class EditTalkController implements Serializable {
 	}
 
 	public Converter getIdConverter() {
-		return new TalkIdConverter(talkService);
+		return new GenericIdConverter<Talk>(talkService);
 	}
 
 }

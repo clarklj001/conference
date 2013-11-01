@@ -10,6 +10,9 @@
 	</ui:define>
 	<ui:define name="content">
 		<h:form id="editspeaker">
+			<f:metadata>
+				<f:viewParam name="id" value="#{editSpeakerController.speaker}" converter="#{editSpeakerController.idConverter}"></f:viewParam>
+			</f:metadata>
 			<custom:inputnamekurzbeschreibung model="#{editSpeakerController}"></custom:inputnamekurzbeschreibung>
 			<h:commandButton action="#{editSpeakerController.doSave()}" value="Save" rendered="#{securityController.loggedIn}"/>
 			<h:messages />
