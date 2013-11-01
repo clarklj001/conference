@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/default.xhtml"
+	xmlns:custom="http://java.sun.com/jsf/composite/custom">
+	<ui:define name="toolbar">
+		<custom:adminbar></custom:adminbar>
+	</ui:define>
+	<ui:define name="content">
+		<h:form id="editspeaker">
+			<custom:inputnamekurzbeschreibung model="#{editSpeakerController}"></custom:inputnamekurzbeschreibung>
+			<h:commandButton action="#{editSpeakerController.doSave()}" value="Save" rendered="#{securityController.loggedIn}"/>
+			<h:messages />
+			
+			
+			<custom:talkstable value="#{editSpeakerController.talks}"></custom:talkstable>
+		</h:form>
+	</ui:define>
+</ui:composition>

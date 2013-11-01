@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<!-- INTERFACE -->
+<composite:interface name="namekurzbeschreibung"
+	displayName="Edit Fields for Name and Kurzbeschreibung"
+	shortDescription="Login and logout actions">
+	<composite:attribute name="model"></composite:attribute>
+	<composite:attribute name="object"></composite:attribute>
+</composite:interface>
+
+<!-- IMPLEMENTATION -->
+<composite:implementation>
+	<h:commandButton
+		action="#{cc.attrs.model.doEdit(cc.attrs.object)}"
+		value="Edit" rendered="#{securityController.loggedIn}" immediate="true">
+		</h:commandButton>
+	<h:commandButton
+		action="#{cc.attrs.model.doDelete(cc.attrs.object)}"
+		value="Delete" rendered="#{securityController.loggedIn}" immediate="true">
+	</h:commandButton>
+</composite:implementation>
+</html>

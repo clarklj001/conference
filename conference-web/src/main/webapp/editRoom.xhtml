@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/default.xhtml"
+	xmlns:custom="http://java.sun.com/jsf/composite/custom">
+	<ui:define name="toolbar">
+		<custom:adminbar></custom:adminbar>
+	</ui:define>
+	<ui:define name="content">
+		<h:form id="editroom">
+			<h:outputLabel value="Name" for="Name" />
+			<h:inputText value="#{editRoomController.name}"
+				id="Name" />
+			<h:outputLabel value="Kapazitaet" for="Kapazitaet" />
+			<h:inputText value="#{editRoomController.capazitaet}"
+				id="Kapazitaet">
+				<f:convertNumber groupingUsed="false" integerOnly="true"/>
+			</h:inputText>
+			<h:inputHidden value="#{editRoomController.id}" />
+			<h:commandButton action="#{editRoomController.doSave()}" value="Save" rendered="#{securityController.loggedIn}"/>
+			<h:messages />
+			
+			<ui:repeat var="date" value="#{editRoomController.dates}">
+				<custom:outputDatetime label="Datum:" value="#{date}"></custom:outputDatetime>
+				<custom:talkstable value="#{editRoomController.getRoomTalks(date)}"></custom:talkstable>
+			</ui:repeat>
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+
+<!-- INTERFACE -->
+<composite:interface name="adminbar" displayName="The Admin Bar"
+	shortDescription="Login and logout actions">
+</composite:interface>
+
+<!-- IMPLEMENTATION -->
+<composite:implementation>
+	<h:form id="adminbar">
+		<h:commandLink action="index?faces-redirect=true" value="Home"/>
+		<h:commandLink action="rooms?faces-redirect=true" value="Rooms"/>
+		<h:commandLink action="speakers?faces-redirect=true" value="Speakers"/>
+		
+		<h:commandLink action="login?faces-redirect=true" rendered="#{!securityController.loggedIn}"
+			value="Login" />
+		<h:commandLink action="#{securityController.tryLogout()}"
+			rendered="#{securityController.loggedIn}" value="Logout" />
+	</h:form>
+</composite:implementation>
+
+</html>

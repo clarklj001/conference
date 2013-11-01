@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:custom="http://java.sun.com/jsf/composite/custom">
+
+<!-- INTERFACE -->
+<composite:interface name="talk" displayName="Talks Table"
+	shortDescription="Listet Talks in einer Tabelle auf">
+	<composite:attribute name="value" type="java.util.List"></composite:attribute>
+</composite:interface>
+
+
+
+<!-- IMPLEMENTATION -->
+<composite:implementation>
+	<h:dataTable var="talk" value="#{cc.attrs.value}">
+		<h:column>
+			<h:commandButton action="#{editTalkController.doEdit(talk.id)}" value="Edit"
+				rendered="#{securityController.loggedIn}">
+				<f:setPropertyActionListener
+					target="#{editConferenceController.conference.id}"
+					value="#{editConferenceController.conference.id}" />
+			</h:commandButton>
+		</h:column>
+		<h:column>
+			<h:outputText value="#{talk.name}" />
+		</h:column>
+		<h:column>
+			<h:outputText value="#{talk.kurzBeschreibung}" />
+		</h:column>
+		<h:column>
+			<custom:outputDatetime value="#{talk.startDate}" time="true"></custom:outputDatetime>
+		</h:column>
+		<h:column>
+			<ui:repeat var="speaker" value="#{talk.speakers}">
+				<h:outputText value="#{speaker.name} " />
+			</ui:repeat>
+		</h:column>
+		<h:column>
+			<h:outputText value="#{talk.room.name} (#{talk.room.capazitaet})" />
+		</h:column>
+	</h:dataTable>
+</composite:implementation>
+</html>

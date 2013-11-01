@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="header">
+		Test
+	</ui:define>
+	<ui:define name="content">
+
+		<h:form id="login">
+			<h:outputLabel value="Username" for="username"/>
+			<h:inputText value="#{securityController.userName}" id="username"/>
+			<h:outputLabel value="Password" for="password"/>
+			<h:inputSecret value="#{securityController.password}" id="password"/>
+			<h:commandButton action="#{securityController.tryLogin()}" value="Login" />
+			
+			<h:messages />
+		</h:form>
+	</ui:define>
+</ui:composition>

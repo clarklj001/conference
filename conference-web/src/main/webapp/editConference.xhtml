@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	template="/WEB-INF/templates/default.xhtml"
+	xmlns:custom="http://java.sun.com/jsf/composite/custom">
+	<ui:define name="toolbar">
+		<custom:adminbar></custom:adminbar>
+	</ui:define>
+	<ui:define name="content">
+		<h:form id="editconference">
+			<h1>Conference</h1>
+			<custom:inputnamekurzbeschreibung
+				model="#{editConferenceController.conference}"></custom:inputnamekurzbeschreibung>
+			<custom:inputDatetime label="Startdatum"
+				value="#{editConferenceController.conference.anfangsDatum}"
+				id="StartDatum"/>
+			<custom:inputDatetime label="Enddatum" value="#{editConferenceController.conference.endDatum}"
+				id="EndDatum"/>
+			<h:commandButton action="#{editConferenceController.doSave()}"
+				value="Speichern" rendered="#{securityController.loggedIn}"/>
+			
+			<ui:repeat var="date" value="#{editConferenceController.dates}">
+				<div>
+				<custom:outputDatetime value="#{date}"></custom:outputDatetime>
+				<custom:talkstable value="#{editConferenceController.talksForDate(date)}"></custom:talkstable>
+				</div>
+			</ui:repeat>
+			<h:commandButton
+				action="#{editTalkController.doNew(editConferenceController.conference)}"
+				value="New Talk" rendered="#{securityController.loggedIn}"/>
+			<h:messages />
+		</h:form>
+	</ui:define>
+</ui:composition>

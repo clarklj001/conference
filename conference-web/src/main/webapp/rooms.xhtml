@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/default.xhtml"
+	xmlns:custom="http://java.sun.com/jsf/composite/custom">
+	<ui:define name="toolbar">
+		<custom:adminbar></custom:adminbar>
+	</ui:define>
+	<ui:define name="content">
+		<h:form id="listrooms">
+			<h2>Rooms</h2>
+			<h:dataTable var="room" value="#{roomController.rooms}">
+				<h:column>
+					<custom:editdelete model="#{editRoomController}" object="#{room}"></custom:editdelete>
+				</h:column>
+				<h:column>
+					<h:commandLink action="#{editRoomController.doEdit(room)}" value="-> #{room.name}" />
+				</h:column>
+				<h:column>
+					<h:outputText value="#{room.capazitaet}" />
+				</h:column>
+			</h:dataTable>
+			<h:commandButton action="#{editRoomController.doNew()}" value="Neuer Raum" rendered="#{securityController.loggedIn}" />
+		</h:form>
+	</ui:define>
+</ui:composition>

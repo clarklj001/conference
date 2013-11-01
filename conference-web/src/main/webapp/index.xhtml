@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/default.xhtml"
+	xmlns:custom="http://java.sun.com/jsf/composite/custom">
+	<ui:define name="toolbar">
+		<custom:adminbar></custom:adminbar>
+	</ui:define>
+	<ui:define name="content">
+		<h:form id="listconferences">
+			<h2>Conferences</h2>
+			<h:dataTable var="conference"
+				value="#{conferenceController.conferences}">
+				<h:column>
+					<f:facet name="header">
+					</f:facet>
+					<custom:editdelete model="#{editConferenceController}"
+						object="#{conference}"></custom:editdelete>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Name</f:facet>
+					<h:commandLink
+						action="#{editConferenceController.doEdit(conference)}"
+						value="(->) #{conference.name}" immediate="true">
+					</h:commandLink>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Kurzbeschreibung</f:facet>
+					<h:outputText value="#{conference.kurzBeschreibung}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Anfangsdatum</f:facet>
+					<td><custom:outputDatetime value="#{conference.anfangsDatum}" /></td>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Enddatum</f:facet>
+					<td><custom:outputDatetime value="#{conference.endDatum}" /></td>
+				</h:column>
+			</h:dataTable>
+			<h:commandButton action="#{editConferenceController.doNew()}"
+				value="New Conference" rendered="#{securityController.loggedIn}" />
+			<h:messages />
+		</h:form>
+	</ui:define>
+</ui:composition>

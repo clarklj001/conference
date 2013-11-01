@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+
+<!-- INTERFACE -->
+<composite:interface name="datetime" displayName="Edit Datetime"
+	shortDescription="Datetime textfield">
+	<composite:attribute name="value" type="java.util.Date"></composite:attribute>
+	<composite:attribute name="label" type="java.lang.String"></composite:attribute>
+	<composite:attribute name="time" type="java.lang.Boolean"></composite:attribute>
+</composite:interface>
+
+<!-- IMPLEMENTATION -->
+<composite:implementation>
+	<h:outputLabel value="#{cc.attrs.label}" for="date"
+		rendered="#{securityController.loggedIn}" />
+	<h:inputText id="date" value="#{cc.attrs.value}"
+		rendered="#{securityController.loggedIn}">
+		<f:convertDateTime pattern="yyyy-MM-dd#{cc.attrs.time ? ' HH:mm' : ''}" />
+	</h:inputText>
+	<h:panelGroup rendered="#{!securityController.loggedIn}" layout="block">
+		<div>
+		<h:outputText value="#{cc.attrs.label}: " />
+		<h:outputText id="datedisplay" value="#{cc.attrs.value}">
+			<f:convertDateTime pattern="yyyy-MM-dd#{cc.attrs.time ? ' HH:mm' : ''}" />
+		</h:outputText>
+		</div>
+	</h:panelGroup>
+</composite:implementation>
+</html>

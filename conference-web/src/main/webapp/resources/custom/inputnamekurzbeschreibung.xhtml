@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+
+<!-- INTERFACE -->
+<composite:interface name="inputnamekurzbeschreibung"
+	displayName="Edit Fields for Name and Kurzbeschreibung"
+	shortDescription="Login and logout actions">
+	<composite:attribute name="model"></composite:attribute>
+</composite:interface>
+
+<!-- IMPLEMENTATION -->
+<composite:implementation>
+	<h:outputLabel value="Name" for="Name"
+		rendered="#{securityController.loggedIn}" />
+	<h:inputText value="#{cc.attrs.model.name}" id="Name"
+		rendered="#{securityController.loggedIn}" />
+	<h:outputLabel value="Kurzbeschreibung" for="Kurzbeschreibung"
+		rendered="#{securityController.loggedIn}" />
+	<h:inputText value="#{cc.attrs.model.kurzBeschreibung}"
+		id="Kurzbeschreibung" rendered="#{securityController.loggedIn}">
+	</h:inputText>
+	<h:panelGroup rendered="#{!securityController.loggedIn}">
+		<h1><h:outputText value="#{cc.attrs.model.name}" /></h1>
+		<h2><h:outputText value="#{cc.attrs.model.kurzBeschreibung}" /></h2>
+	</h:panelGroup>
+	<h:inputHidden value="#{cc.attrs.model.id}" />
+</composite:implementation>
+
+</html>
