@@ -64,9 +64,9 @@ public class EditSpeakerController {
 		speaker = speakerService.update(speaker);
 	}
 
-	public void doDelete() {
+	public String doDelete() {
 		speakerService.delete(speaker);
-		speaker.setId(null);
+		return "speakers?faces-redirect=true";
 	}
 
 	public List<Talk> getTalks() {

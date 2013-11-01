@@ -14,7 +14,6 @@
 				<f:viewParam name="id" value="#{editSpeakerController.speaker}" converter="#{editSpeakerController.idConverter}"></f:viewParam>
 			</f:metadata>
 			<custom:inputnamekurzbeschreibung model="#{editSpeakerController}"></custom:inputnamekurzbeschreibung>
-			<h:commandButton action="#{editSpeakerController.doSave()}" value="Save" rendered="#{securityController.loggedIn}"/>
 			
 			<custom:commandSaveButton model="#{editSpeakerController}"/>
 			<h:messages />

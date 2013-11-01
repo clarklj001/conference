@@ -110,8 +110,9 @@ public class EditTalkController implements Serializable {
 	 * talkService.read(id); } return "editTalk"; }
 	 */
 
-	public void doDelete(String id) {
+	public String doDelete(String id) {
 		talkService.delete(Long.valueOf(id));
+		return "index?faces-redirect=true";
 	}
 
 	public String doNew(Conference conf) {

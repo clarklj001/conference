@@ -55,9 +55,9 @@ public class EditRoomController {
 		room = roomService.update(room);
 	}
 
-	public void doDelete() {
+	public String doDelete() {
 		roomService.delete(room);
-		room.setId(null);
+		return "rooms?faces-redirect=true";
 	}
 
 	public String doNew() {
