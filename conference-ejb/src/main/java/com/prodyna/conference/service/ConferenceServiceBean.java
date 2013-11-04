@@ -48,4 +48,15 @@ public class ConferenceServiceBean extends GenericCrudServiceBean<Conference>
 		return query.getResultList();
 
 	}
+
+	@Override
+	protected boolean isValid(Conference t) {
+		if (t.getAnfangsDatum().equals(t.getEndDatum())) {
+			// ok
+		} else if (t.getEndDatum().before(t.getAnfangsDatum())) {
+			throw new IllegalArgumentException("Conference Dates invalid: ["
+					+ t.getAnfangsDatum() + ", " + t.getEndDatum() + "]");
+		}
+		return super.isValid(t);
+	}
 }

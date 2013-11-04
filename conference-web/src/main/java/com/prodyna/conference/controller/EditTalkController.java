@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.inject.Inject;
 
@@ -43,6 +45,9 @@ public class EditTalkController implements Serializable {
 
 	@Inject
 	ConferenceService conferenceService;
+
+	@Inject
+	FacesContext facesContext;
 
 	@PostConstruct
 	void postConstruct() {
@@ -97,15 +102,33 @@ public class EditTalkController implements Serializable {
 	}
 
 	public void doSave() {
-		talk = talkService.update(talk);
+		try {
+			talk = talkService.update(talk);
+		} catch (Exception e) {
+			addErrorMessage(e);
+		}
+	}
+
+	private void addErrorMessage(Exception e) {
+		FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+				"Error " + e.getLocalizedMessage(), e.getLocalizedMessage());
+		facesContext.addMessage("Error", fm);
 	}
 
 	public void doDelete() {
-		talkService.delete(talk);
+		try {
+			talkService.delete(talk);
+		} catch (Exception e) {
+			addErrorMessage(e);
+		}
 	}
 
 	public String doDelete(String id) {
-		talkService.delete(Long.valueOf(id));
+		try {
+			talkService.delete(Long.valueOf(id));
+		} catch (Exception e) {
+			addErrorMessage(e);
+		}
 		return "index?faces-redirect=true";
 	}
 

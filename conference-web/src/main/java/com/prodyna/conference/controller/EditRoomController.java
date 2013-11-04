@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.inject.Inject;
 
@@ -21,6 +23,9 @@ public class EditRoomController {
 	RoomService roomService;
 
 	Room room;
+
+	@Inject
+	FacesContext facesContext;
 
 	@PostConstruct
 	void postConstruct() {
@@ -52,11 +57,19 @@ public class EditRoomController {
 	}
 
 	public void doSave() {
-		room = roomService.update(room);
+		try {
+			room = roomService.update(room);
+		} catch (Exception e) {
+			addErrorMessage(e);
+		}
 	}
 
 	public String doDelete() {
-		roomService.delete(room);
+		try {
+			roomService.delete(room);
+		} catch (Exception e) {
+			addErrorMessage(e);
+		}
 		return "rooms?faces-redirect=true";
 	}
 
@@ -96,5 +109,11 @@ public class EditRoomController {
 
 	public void setRoom(Room room) {
 		this.room = room;
+	}
+
+	private void addErrorMessage(Exception e) {
+		FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+				"Error " + e.getLocalizedMessage(), e.getLocalizedMessage());
+		facesContext.addMessage("Error", fm);
 	}
 }

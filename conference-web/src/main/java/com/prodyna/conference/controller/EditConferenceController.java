@@ -6,7 +6,9 @@ import java.util.Date;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -32,12 +34,23 @@ public class EditConferenceController implements Serializable {
 	@Inject
 	ConferenceService conferenceService;
 
+	@Inject
+	FacesContext facesContext;
+
 	public void doSave() {
-		setConference(conferenceService.update(getConference()));
+		try {
+			setConference(conferenceService.update(getConference()));
+		} catch (Exception e) {
+			addErrorMessage(e);
+		}
 	}
 
 	public void doDelete() {
-		conferenceService.delete(getConference());
+		try {
+			conferenceService.delete(getConference());
+		} catch (Exception e) {
+			addErrorMessage(e);
+		}
 	}
 
 	public String doEdit(Conference conf) {
@@ -105,6 +118,12 @@ public class EditConferenceController implements Serializable {
 
 	public Converter getIdConverter() {
 		return new GenericIdConverter<Conference>(conferenceService);
+	}
+
+	private void addErrorMessage(Exception e) {
+		FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+				"Error " + e.getLocalizedMessage(), e.getLocalizedMessage());
+		facesContext.addMessage(fm.getDetail(), fm);
 	}
 
 }

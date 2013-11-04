@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.inject.Inject;
 
@@ -19,6 +21,9 @@ public class EditSpeakerController {
 
 	@Inject
 	SpeakerService speakerService;
+
+	@Inject
+	FacesContext facesContext;
 
 	@PostConstruct
 	void postConstruct() {
@@ -61,11 +66,19 @@ public class EditSpeakerController {
 	}
 
 	public void doSave() {
-		speaker = speakerService.update(speaker);
+		try {
+			speaker = speakerService.update(speaker);
+		} catch (Exception e) {
+			addErrorMessage(e);
+		}
 	}
 
 	public String doDelete() {
-		speakerService.delete(speaker);
+		try {
+			speakerService.delete(speaker);
+		} catch (Exception e) {
+			addErrorMessage(e);
+		}
 		return "speakers?faces-redirect=true";
 	}
 
@@ -91,5 +104,11 @@ public class EditSpeakerController {
 
 	public void setSpeaker(Speaker speaker) {
 		this.speaker = speaker;
+	}
+
+	private void addErrorMessage(Exception e) {
+		FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+				"Error " + e.getLocalizedMessage(), e.getLocalizedMessage());
+		facesContext.addMessage("Error", fm);
 	}
 }
