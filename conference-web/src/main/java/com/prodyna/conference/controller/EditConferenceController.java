@@ -6,9 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -22,7 +20,8 @@ import com.prodyna.conference.util.ViewScope;
 @Named
 @ManagedBean
 @RequestScoped
-public class EditConferenceController implements Serializable {
+public class EditConferenceController extends BasicController implements
+		Serializable {
 
 	/**
 	 * 
@@ -33,9 +32,6 @@ public class EditConferenceController implements Serializable {
 
 	@Inject
 	ConferenceService conferenceService;
-
-	@Inject
-	FacesContext facesContext;
 
 	public void doSave() {
 		try {
@@ -118,12 +114,6 @@ public class EditConferenceController implements Serializable {
 
 	public Converter getIdConverter() {
 		return new GenericIdConverter<Conference>(conferenceService);
-	}
-
-	private void addErrorMessage(Exception e) {
-		FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR,
-				"Error " + e.getLocalizedMessage(), e.getLocalizedMessage());
-		facesContext.addMessage(fm.getDetail(), fm);
 	}
 
 }

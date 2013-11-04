@@ -19,6 +19,7 @@ public class TalkServiceBean extends GenericCrudServiceBean<Talk> implements
 	protected boolean isValid(Talk t) {
 		// TODO check if each speaker has only this talk at that time.
 		// TODO check if room is not occupied at the time of the talk.
+
 		// check if time of talk is within bounds of conference.
 		Date confAnfangsDatum = t.getConference().getAnfangsDatum();
 		Date confEndDatum = t.getConference().getEndDatum();

@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.inject.Inject;
 
@@ -16,14 +14,11 @@ import com.prodyna.conference.model.Talk;
 import com.prodyna.conference.service.SpeakerService;
 
 @Model
-public class EditSpeakerController {
+public class EditSpeakerController extends BasicController {
 	Speaker speaker;
 
 	@Inject
 	SpeakerService speakerService;
-
-	@Inject
-	FacesContext facesContext;
 
 	@PostConstruct
 	void postConstruct() {
@@ -106,9 +101,4 @@ public class EditSpeakerController {
 		this.speaker = speaker;
 	}
 
-	private void addErrorMessage(Exception e) {
-		FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR,
-				"Error " + e.getLocalizedMessage(), e.getLocalizedMessage());
-		facesContext.addMessage("Error", fm);
-	}
 }

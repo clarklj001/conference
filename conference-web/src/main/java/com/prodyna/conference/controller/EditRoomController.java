@@ -6,8 +6,6 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.inject.Inject;
 
@@ -17,15 +15,12 @@ import com.prodyna.conference.model.Talk;
 import com.prodyna.conference.service.RoomService;
 
 @Model
-public class EditRoomController {
+public class EditRoomController extends BasicController {
 
 	@Inject
 	RoomService roomService;
 
 	Room room;
-
-	@Inject
-	FacesContext facesContext;
 
 	@PostConstruct
 	void postConstruct() {
@@ -111,9 +106,4 @@ public class EditRoomController {
 		this.room = room;
 	}
 
-	private void addErrorMessage(Exception e) {
-		FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR,
-				"Error " + e.getLocalizedMessage(), e.getLocalizedMessage());
-		facesContext.addMessage("Error", fm);
-	}
 }
