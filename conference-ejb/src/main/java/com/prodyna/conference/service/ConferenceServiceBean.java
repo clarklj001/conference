@@ -6,9 +6,11 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.TypedQuery;
 
+import com.prodyna.conference.common.monitoring.Monitored;
 import com.prodyna.conference.model.Conference;
 import com.prodyna.conference.model.Talk;
 
+@Monitored
 @Stateless
 public class ConferenceServiceBean extends GenericCrudServiceBean<Conference>
 		implements ConferenceService {

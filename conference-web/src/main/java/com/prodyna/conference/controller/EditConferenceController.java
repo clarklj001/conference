@@ -41,7 +41,10 @@ public class EditConferenceController implements Serializable {
 	}
 
 	public String doEdit(Conference conf) {
-		setConference(conferenceService.read(conf.getId()));
+		if (conf.getId() != null) {
+			conf = conferenceService.read(conf.getId());
+		}
+		setConference(conf);
 		return "editConference";
 	}
 

@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
-import javax.faces.component.UISelectOne;
 import javax.faces.convert.Converter;
 import javax.inject.Inject;
 
@@ -28,8 +27,6 @@ public class EditTalkController implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-	private UISelectOne uiInputForEditId;
 
 	Talk talk;
 
@@ -59,7 +56,9 @@ public class EditTalkController implements Serializable {
 	}
 
 	public void setTalk(Talk talk) {
-		this.talk = talk;
+		if (talk != null) {
+			this.talk = talk;
+		}
 	}
 
 	public List<String> getSpeakerIds() {
@@ -105,11 +104,6 @@ public class EditTalkController implements Serializable {
 		talkService.delete(talk);
 	}
 
-	/*
-	 * public String doEdit(Long id) { if (id != null && id != 0) { this.talk =
-	 * talkService.read(id); } return "editTalk"; }
-	 */
-
 	public String doDelete(String id) {
 		talkService.delete(Long.valueOf(id));
 		return "index?faces-redirect=true";
@@ -138,7 +132,7 @@ public class EditTalkController implements Serializable {
 			this.editId = id;
 			talk = talkService.read(Long.valueOf(id));
 		}
-		return "editTalk?faces-redirect=true";
+		return "editTalk";
 	}
 
 	public String getEditId() {
@@ -147,14 +141,6 @@ public class EditTalkController implements Serializable {
 
 	public void setEditId(String editId) {
 		this.editId = editId;
-	}
-
-	public UISelectOne getUiInputForEditId() {
-		return uiInputForEditId;
-	}
-
-	public void setUiInputForEditId(UISelectOne uiInputForEditId) {
-		this.uiInputForEditId = uiInputForEditId;
 	}
 
 	public Converter getIdConverter() {
