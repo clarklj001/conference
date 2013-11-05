@@ -1,17 +1,27 @@
 package com.prodyna.conference.common.jmx;
 
+import java.lang.management.ManagementFactory;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import javax.interceptor.InvocationContext;
+import javax.annotation.PostConstruct;
+import javax.management.MBeanServer;
+import javax.management.MBeanServerInvocationHandler;
+import javax.management.ObjectName;
 
 public class PerformanceCollector implements PerformanceCollectorMXBean {
-	Map<String, PerformanceEntry> map = new HashMap<String, PerformanceEntry>();
+	Map<String, PerformanceEntry> map;
+
+	@PostConstruct
+	void postConstruct() {
+		map = new HashMap<String, PerformanceEntry>();
+	}
 
 	@Override
-	public void addEntry(InvocationContext context, long duration,
-			boolean success) {
-		PerformanceEntry entry = entryByContext(context);
+	public void addEntry(String signature, long duration, boolean success) {
+		PerformanceEntry entry = entryByContext(signature);
 		entry.addCall(duration, success);
 	}
 
@@ -20,39 +30,38 @@ public class PerformanceCollector implements PerformanceCollectorMXBean {
 	 * @param context
 	 * @return non-null entry
 	 */
-	private PerformanceEntry entryByContext(InvocationContext context) {
-		String signature = signature(context);
+	private PerformanceEntry entryByContext(String signature) {
 		PerformanceEntry entry = map.get(signature);
 
 		if (entry == null) {
-			entry = new PerformanceEntry();
+			entry = new PerformanceEntry(signature);
 			map.put(signature, entry);
 		}
 		return entry;
 	}
 
-	private static String signature(InvocationContext context) {
-		StringBuilder signature = new StringBuilder();
-
-		signature.append(context.getMethod().getClass().getName()).append(":");
-		signature.append(context.getMethod().getName()).append("(");
-		Class<?>[] types = context.getMethod().getParameterTypes();
-		for (Class<?> class1 : types) {
-			signature.append(class1.getName()).append(", ");
-		}
-		signature.append(")");
-
-		return signature.toString();
-	}
-
 	@Override
-	public PerformanceEntry[] getEntries() {
-		return map.entrySet().toArray(new PerformanceEntry[] {});
+	public List<PerformanceEntry> getEntries() {
+		return new ArrayList<PerformanceEntry>(map.values());
 	}
 
 	@Override
 	public void reset() {
 		map.clear();
+	}
+
+	public static PerformanceCollectorMXBean getRegisteredInstance() {
+		MBeanServer ms = ManagementFactory.getPlatformMBeanServer();
+		PerformanceCollectorMXBean result = null;
+		try {
+			ObjectName objectName = new ObjectName(
+					PerformanceCollectorMXBean.OBJECT_NAME);
+			result = MBeanServerInvocationHandler.newProxyInstance(ms,
+					objectName, PerformanceCollectorMXBean.class, false);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		return result;
 	}
 
 }

@@ -10,7 +10,7 @@ import javax.interceptor.InterceptorBinding;
 
 @Inherited
 @InterceptorBinding
-@Target(value = { ElementType.TYPE, ElementType.METHOD })
+@Target(value = { ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Monitored {
 

@@ -1,14 +1,14 @@
 package com.prodyna.conference.common.jmx;
 
-import javax.interceptor.InvocationContext;
+import java.util.List;
 
 public interface PerformanceCollectorMXBean {
 
 	String OBJECT_NAME = "com.prodyna.conference:service=PerformanceCollector";
 
-	void addEntry(InvocationContext context, long duration, boolean success);
+	void addEntry(String signature, long duration, boolean success);
 
-	PerformanceEntry[] getEntries();
+	List<PerformanceEntry> getEntries();
 
 	void reset();
 

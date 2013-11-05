@@ -8,11 +8,16 @@ package com.prodyna.conference.common.jmx;
  */
 public class PerformanceEntry {
 
+	private String name;
 	private long sumCalls;
 	private long sumCallDuration;
 	private long sumFailures;
 	private long maxDuration;
 	private long minDuration;
+
+	PerformanceEntry(String name) {
+		this.name = name;
+	}
 
 	public void addCall(long duration, boolean success) {
 		boolean max;
@@ -63,6 +68,10 @@ public class PerformanceEntry {
 
 	public long getMinDuration() {
 		return minDuration;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 }
