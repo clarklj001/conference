@@ -5,12 +5,15 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import javax.ejb.Stateless;
+import javax.interceptor.Interceptors;
 
 import com.prodyna.conference.common.monitoring.Monitored;
+import com.prodyna.conference.common.monitoring.MonitoringInterceptor;
 import com.prodyna.conference.model.Talk;
 
 @Stateless
 @Monitored
+@Interceptors({ MonitoringInterceptor.class })
 public class TalkServiceBean extends GenericCrudServiceBean<Talk> implements
 		TalkService {
 	public TalkServiceBean() {
