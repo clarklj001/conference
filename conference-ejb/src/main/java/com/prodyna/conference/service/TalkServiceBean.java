@@ -6,9 +6,11 @@ import java.util.GregorianCalendar;
 
 import javax.ejb.Stateless;
 
+import com.prodyna.conference.common.monitoring.Monitored;
 import com.prodyna.conference.model.Talk;
 
 @Stateless
+@Monitored
 public class TalkServiceBean extends GenericCrudServiceBean<Talk> implements
 		TalkService {
 	public TalkServiceBean() {

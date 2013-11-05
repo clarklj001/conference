@@ -3,11 +3,14 @@ package com.prodyna.conference.common.monitoring;
 import java.lang.reflect.Method;
 
 import javax.interceptor.AroundInvoke;
+import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Interceptor
+@Monitored
 public class MonitoringInterceptor {
 
 	Logger logger = LoggerFactory.getLogger(MonitoringInterceptor.class);

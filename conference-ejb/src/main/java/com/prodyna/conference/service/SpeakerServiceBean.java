@@ -5,10 +5,12 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.TypedQuery;
 
+import com.prodyna.conference.common.monitoring.Monitored;
 import com.prodyna.conference.model.Speaker;
 import com.prodyna.conference.model.Talk;
 
 @Stateless
+@Monitored
 public class SpeakerServiceBean extends GenericCrudServiceBean<Speaker>
 		implements SpeakerService {
 	public SpeakerServiceBean() {
