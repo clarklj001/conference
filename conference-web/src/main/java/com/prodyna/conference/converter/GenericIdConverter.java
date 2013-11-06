@@ -10,6 +10,15 @@ import javax.faces.convert.Converter;
 import com.prodyna.conference.model.IdHolder;
 import com.prodyna.conference.service.GenericCrudService;
 
+/**
+ * 
+ * Converts an ID from an URL parameter to an entity object.
+ * 
+ * @author prodyna
+ * 
+ * @param <L>
+ *            Entity, to be loaded
+ */
 public class GenericIdConverter<L extends IdHolder> implements Converter {
 
 	GenericCrudService<L> crudService;
