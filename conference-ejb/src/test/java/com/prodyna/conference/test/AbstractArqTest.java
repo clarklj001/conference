@@ -1,14 +1,8 @@
 package com.prodyna.conference.test;
 
-import javax.inject.Inject;
-
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import com.prodyna.conference.common.jmx.MBeanStartup;
 import com.prodyna.conference.common.jmx.PerformanceCollector;
@@ -37,9 +31,7 @@ import com.prodyna.conference.service.TalkService;
 import com.prodyna.conference.service.TalkServiceBean;
 import com.prodyna.conference.util.Resources;
 
-@RunWith(Arquillian.class)
-public class HelloWorldServiceTest {
-	@Deployment
+public class AbstractArqTest {
 	public static Archive<?> createTestArchive() {
 		return ShrinkWrap
 				.create(WebArchive.class, "test.war")
@@ -61,37 +53,5 @@ public class HelloWorldServiceTest {
 				.addAsResource("META-INF/beans.xml")
 				// Deploy our test datasource
 				.addAsWebInfResource("test-ds.xml", "test-ds.xml");
-	}
-
-	@Inject
-	private ConferenceService conferenceServiceBean;
-
-	@Inject
-	private RoomService roomServiceBean;
-
-	@Inject
-	private SpeakerService speakerServiceBean;
-
-	@Inject
-	private TalkService talkServiceBean;
-
-	@Test
-	public void testConferenceService() {
-		// TODO
-	}
-
-	@Test
-	public void testRoomService() {
-		// TODO
-	}
-
-	@Test
-	public void testSpeakerService() {
-		// TODO
-	}
-
-	@Test
-	public void testTalkService() {
-		// TODO
 	}
 }
