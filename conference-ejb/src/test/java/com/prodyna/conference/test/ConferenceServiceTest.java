@@ -3,6 +3,7 @@ package com.prodyna.conference.test;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import javax.ejb.EJBException;
 import javax.inject.Inject;
@@ -30,6 +31,7 @@ public class ConferenceServiceTest {
 
 	@Test
 	public void testCrud() {
+		List<Conference> listConferences1 = conferenceService.listConferences();
 
 		Conference conf = new Conference();
 		Date anfangsDatum = new Date();
@@ -41,9 +43,13 @@ public class ConferenceServiceTest {
 		String kurzBeschreibung = "Kurzbeschreibung";
 		conf.setName(name);
 		conf.setKurzBeschreibung(kurzBeschreibung);
+
 		conf = conferenceService.update(conf);
+		List<Conference> listConferences2 = conferenceService.listConferences();
 
 		Assert.assertNotNull(conf.getId());
+		Assert.assertEquals(listConferences1.size() + 1,
+				listConferences2.size());
 
 		conf = conferenceService.read(conf.getId());
 		Assert.assertEquals(name, conf.getName());
@@ -51,10 +57,19 @@ public class ConferenceServiceTest {
 		Assert.assertEquals(anfangsDatum, conf.getAnfangsDatum());
 		Assert.assertEquals(calendar.getTime(), conf.getEndDatum());
 
+		calendar.add(Calendar.DATE, 1);
+		conf.setEndDatum(calendar.getTime());
+		conferenceService.update(conf);
+		conf = conferenceService.read(conf.getId());
+		Assert.assertEquals(calendar.getTime(), conf.getEndDatum());
+
 		conferenceService.delete(conf);
 
 		Conference result = conferenceService.read(conf.getId());
 		Assert.assertNull(result);
+
+		listConferences2 = conferenceService.listConferences();
+		Assert.assertEquals(listConferences1.size(), listConferences2.size());
 	}
 
 	@Test(expected = EJBException.class)
