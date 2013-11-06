@@ -41,9 +41,9 @@ public class MonitoringInterceptor {
 			duration = System.currentTimeMillis() - startTime;
 			toThrow = e;
 		}
-		logger.info("duration=" + duration + " " + success);
-		getPerformanceCollector().addEntry(signature(context), duration,
-				success);
+		String signature = signature(context);
+		logger.info(signature + ": duration=" + duration + " " + success);
+		getPerformanceCollector().addEntry(signature, duration, success);
 		if (toThrow != null) {
 			throw new RuntimeException(toThrow);
 		}
