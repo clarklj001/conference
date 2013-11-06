@@ -10,7 +10,12 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.prodyna.conference.event.HelloEvent;
+import com.prodyna.conference.common.jmx.MBeanStartup;
+import com.prodyna.conference.common.jmx.PerformanceCollector;
+import com.prodyna.conference.common.jmx.PerformanceCollectorMXBean;
+import com.prodyna.conference.common.jmx.PerformanceEntry;
+import com.prodyna.conference.common.monitoring.Monitored;
+import com.prodyna.conference.common.monitoring.MonitoringInterceptor;
 import com.prodyna.conference.model.AbstractIdHolder;
 import com.prodyna.conference.model.BeschreibungHolder;
 import com.prodyna.conference.model.Conference;
@@ -46,8 +51,11 @@ public class HelloWorldServiceTest {
 						GenericCrudService.class, RoomServiceBean.class,
 						RoomService.class, SpeakerServiceBean.class,
 						SpeakerService.class, TalkServiceBean.class,
+						Monitored.class, MBeanStartup.class,
+						PerformanceCollector.class,
+						PerformanceCollectorMXBean.class,
+						PerformanceEntry.class, MonitoringInterceptor.class,
 						TalkService.class, Resources.class)
-				.addClasses(HelloEvent.class)
 				.addAsResource("META-INF/test-persistence.xml",
 						"META-INF/persistence.xml")
 				.addAsResource("META-INF/beans.xml")
