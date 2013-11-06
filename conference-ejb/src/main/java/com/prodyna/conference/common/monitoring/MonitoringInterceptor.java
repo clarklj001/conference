@@ -1,11 +1,11 @@
 package com.prodyna.conference.common.monitoring;
 
+import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.prodyna.conference.common.jmx.PerformanceCollector;
 import com.prodyna.conference.common.jmx.PerformanceCollectorMXBean;
@@ -16,7 +16,8 @@ public class MonitoringInterceptor {
 
 	PerformanceCollectorMXBean performanceCollector;
 
-	Logger logger = LoggerFactory.getLogger(MonitoringInterceptor.class);
+	@Inject
+	Logger logger;
 
 	private PerformanceCollectorMXBean getPerformanceCollector() {
 		if (performanceCollector == null) {

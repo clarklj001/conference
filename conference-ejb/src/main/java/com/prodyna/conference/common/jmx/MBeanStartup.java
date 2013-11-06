@@ -11,7 +11,6 @@ import javax.management.MBeanServer;
 import javax.management.ObjectName;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * MBean Startup
@@ -23,7 +22,8 @@ import org.slf4j.LoggerFactory;
 @Singleton
 public class MBeanStartup {
 
-	Logger log = LoggerFactory.getLogger(MBeanStartup.class);
+	@Inject
+	Logger log;
 
 	@Inject
 	PerformanceCollectorMXBean performanceCollector;
