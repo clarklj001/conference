@@ -15,7 +15,7 @@ import org.slf4j.Logger;
 /**
  * MBean Startup
  * 
- * @author prodyna
+ * @author Michael Kirchmann, PRODYNA AG
  * 
  */
 @Startup

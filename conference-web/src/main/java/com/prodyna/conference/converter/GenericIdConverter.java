@@ -14,7 +14,7 @@ import com.prodyna.conference.service.GenericCrudService;
  * 
  * Converts an ID from an URL parameter to an entity object.
  * 
- * @author prodyna
+ * @author Michael Kirchmann, PRODYNA AG
  * 
  * @param <L>
  *            Entity, to be loaded

@@ -3,7 +3,7 @@ package com.prodyna.conference.common.jmx;
 /**
  * Entry for Performance
  * 
- * @author prodyna
+ * @author Michael Kirchmann, PRODYNA AG
  * 
  */
 public class PerformanceEntry {
