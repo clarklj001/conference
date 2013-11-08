@@ -18,8 +18,9 @@ import com.prodyna.conference.model.Talk;
 @Interceptors({ MonitoringInterceptor.class })
 public class TalkServiceBean extends GenericCrudServiceBean<Talk> implements
 		TalkService {
-	@Inject ConferenceService conferenceService;
-	
+	@Inject
+	ConferenceService conferenceService;
+
 	public TalkServiceBean() {
 		super(Talk.class);
 	}
@@ -29,8 +30,9 @@ public class TalkServiceBean extends GenericCrudServiceBean<Talk> implements
 		// TODO check if each speaker has only this talk at that time.
 		// TODO check if room is not occupied at the time of the talk.
 
-		Conference conference = conferenceService.read(t.getId());
-		
+		Conference conference = conferenceService.read(t.getConference()
+				.getId());
+
 		// check if time of talk is within bounds of conference.
 		Date confAnfangsDatum = conference.getAnfangsDatum();
 		Date confEndDatum = conference.getEndDatum();
