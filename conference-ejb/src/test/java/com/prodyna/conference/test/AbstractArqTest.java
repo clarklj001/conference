@@ -14,7 +14,6 @@ import com.prodyna.conference.model.AbstractIdHolder;
 import com.prodyna.conference.model.BeschreibungHolder;
 import com.prodyna.conference.model.Conference;
 import com.prodyna.conference.model.IdHolder;
-import com.prodyna.conference.model.Member;
 import com.prodyna.conference.model.NameHolder;
 import com.prodyna.conference.model.Room;
 import com.prodyna.conference.model.Speaker;
@@ -35,7 +34,7 @@ public class AbstractArqTest {
 	public static Archive<?> createTestArchive() {
 		return ShrinkWrap
 				.create(WebArchive.class, "test.war")
-				.addClasses(Member.class, BeschreibungHolder.class,
+				.addClasses(BeschreibungHolder.class,
 						Conference.class, AbstractIdHolder.class,
 						IdHolder.class, NameHolder.class, Room.class,
 						Speaker.class, Talk.class, ConferenceServiceBean.class,
