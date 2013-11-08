@@ -5,10 +5,12 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.interceptor.Interceptors;
 
 import com.prodyna.conference.common.monitoring.Monitored;
 import com.prodyna.conference.common.monitoring.MonitoringInterceptor;
+import com.prodyna.conference.model.Conference;
 import com.prodyna.conference.model.Talk;
 
 @Stateless
@@ -16,6 +18,8 @@ import com.prodyna.conference.model.Talk;
 @Interceptors({ MonitoringInterceptor.class })
 public class TalkServiceBean extends GenericCrudServiceBean<Talk> implements
 		TalkService {
+	@Inject ConferenceService conferenceService;
+	
 	public TalkServiceBean() {
 		super(Talk.class);
 	}
@@ -25,9 +29,11 @@ public class TalkServiceBean extends GenericCrudServiceBean<Talk> implements
 		// TODO check if each speaker has only this talk at that time.
 		// TODO check if room is not occupied at the time of the talk.
 
+		Conference conference = conferenceService.read(t.getId());
+		
 		// check if time of talk is within bounds of conference.
-		Date confAnfangsDatum = t.getConference().getAnfangsDatum();
-		Date confEndDatum = t.getConference().getEndDatum();
+		Date confAnfangsDatum = conference.getAnfangsDatum();
+		Date confEndDatum = conference.getEndDatum();
 		GregorianCalendar gc = new GregorianCalendar();
 		gc.setTime(confEndDatum);
 		gc.add(Calendar.DATE, 1);

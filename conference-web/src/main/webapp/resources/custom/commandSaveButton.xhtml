@@ -15,13 +15,13 @@
 
 <!-- IMPLEMENTATION -->
 <composite:implementation>
-	<h:commandButton
-		action="#{cc.attrs.model.doSave()}"
-		value="Save" rendered="#{securityController.loggedIn}">
+	<div class="commands">
+		<h:commandButton action="#{cc.attrs.model.doSave()}" value="Save"
+			rendered="#{securityController.loggedIn}">
 		</h:commandButton>
-	<h:commandButton
-		action="#{cc.attrs.model.doDelete()}"
-		value="Delete" rendered="#{securityController.loggedIn}">
-	</h:commandButton>
+		<h:commandButton action="#{cc.attrs.model.doDelete()}" value="Delete"
+			rendered="#{securityController.loggedIn}">
+		</h:commandButton>
+	</div>
 </composite:implementation>
 </html>
