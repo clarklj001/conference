@@ -45,31 +45,6 @@ INSERT INTO `Conference` VALUES (1,'2013-10-29 01:00:00','2013-10-29 01:00:00','
 UNLOCK TABLES;
 
 --
--- Table structure for table `conference`
---
-
-DROP TABLE IF EXISTS `conference`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `conference` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `start` date NOT NULL,
-  `end` date NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `conference`
---
-
-LOCK TABLES `conference` WRITE;
-/*!40000 ALTER TABLE `conference` DISABLE KEYS */;
-/*!40000 ALTER TABLE `conference` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `hibernate_sequence`
 --
 
@@ -163,32 +138,6 @@ CREATE TABLE `Talk_Speaker` (
 LOCK TABLES `Talk_Speaker` WRITE;
 /*!40000 ALTER TABLE `Talk_Speaker` DISABLE KEYS */;
 /*!40000 ALTER TABLE `Talk_Speaker` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `Registrant`
---
-
-DROP TABLE IF EXISTS `Registrant`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Registrant` (
-  `id` bigint(20) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `name` varchar(25) NOT NULL,
-  `phone_number` varchar(12) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Registrant`
---
-
-LOCK TABLES `Registrant` WRITE;
-/*!40000 ALTER TABLE `Registrant` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Registrant` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
