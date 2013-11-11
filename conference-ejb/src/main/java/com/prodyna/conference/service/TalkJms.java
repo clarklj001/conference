@@ -2,6 +2,7 @@ package com.prodyna.conference.service;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.jms.JMSException;
@@ -28,14 +29,14 @@ public class TalkJms {
 	/**
 	 * Queue connection factory.
 	 */
-	@Inject
-	private QueueConnectionFactory qcf;
+	@Resource
+	private QueueConnectionFactory queueConnectionFactory;
 
 	/**
 	 * Initial context.
 	 */
-	@Inject
-	private InitialContext iniCtx;
+	@Resource
+	private InitialContext initialContext;
 
 	/**
 	 * Queue connection util.
@@ -47,8 +48,8 @@ public class TalkJms {
 	 */
 	@PostConstruct
 	private void setupQueue() {
-		queueConnectionHandler = new QueueConnectionHandler(qcf, iniCtx,
-				QUEUE_TALK_CHANGE);
+		queueConnectionHandler = new QueueConnectionHandler(queueConnectionFactory,
+				initialContext, QUEUE_TALK_CHANGE);
 		queueConnectionHandler.connect();
 	}
 

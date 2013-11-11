@@ -1,0 +1,12 @@
+<messaging-deployment xmlns="urn:jboss:messaging-deployment:1.0">
+
+    <hornetq-server>
+        <jms-destinations>
+            <jms-queue name="talkUpdatedQueue">
+                <entry name="queue/talkupdated"/>
+                <entry name="java:jboss/exported/jms/queue/talkupdated"/>
+            </jms-queue>
+        </jms-destinations>
+    </hornetq-server>
+
+</messaging-deployment>
