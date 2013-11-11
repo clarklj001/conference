@@ -5,9 +5,10 @@ import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.jms.ConnectionFactory;
 import javax.jms.JMSException;
-import javax.jms.QueueConnectionFactory;
 import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
 import org.slf4j.Logger;
 
@@ -29,14 +30,8 @@ public class TalkJms {
 	/**
 	 * Queue connection factory.
 	 */
-	@Resource
-	private QueueConnectionFactory queueConnectionFactory;
-
-	/**
-	 * Initial context.
-	 */
-	@Resource
-	private InitialContext initialContext;
+	@Resource(lookup = "java:/ConnectionFactory")
+	private ConnectionFactory queueConnectionFactory;
 
 	/**
 	 * Queue connection util.
@@ -45,11 +40,13 @@ public class TalkJms {
 
 	/**
 	 * Set up queue connection.
+	 * 
+	 * @throws NamingException
 	 */
 	@PostConstruct
-	private void setupQueue() {
-		queueConnectionHandler = new QueueConnectionHandler(queueConnectionFactory,
-				initialContext, QUEUE_TALK_CHANGE);
+	private void setupQueue() throws NamingException {
+		queueConnectionHandler = new QueueConnectionHandler(
+				queueConnectionFactory, new InitialContext(), QUEUE_TALK_CHANGE);
 		queueConnectionHandler.connect();
 	}
 

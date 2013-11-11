@@ -1,5 +1,6 @@
 package com.prodyna.conference.common.queue;
 
+import javax.jms.ConnectionFactory;
 import javax.jms.JMSException;
 import javax.jms.Queue;
 import javax.jms.QueueConnection;
@@ -24,7 +25,7 @@ public class QueueConnectionHandler {
 	/**
 	 * Queue connection factory.
 	 */
-	private QueueConnectionFactory queueConnectionFactory;
+	private ConnectionFactory queueConnectionFactory;
 
 	/**
 	 * Queue connection.
@@ -49,14 +50,13 @@ public class QueueConnectionHandler {
 	/**
 	 * Constructor taking the queue name.
 	 * 
-	 * @param iniialContext
+	 * @param initialContext
 	 * @param queueConnectionFactory
 	 */
-	public QueueConnectionHandler(
-			QueueConnectionFactory queueConnectionFactory,
-			InitialContext iniialContext, String queueName) {
+	public QueueConnectionHandler(ConnectionFactory queueConnectionFactory,
+			InitialContext initialContext, String queueName) {
 		this.queueConnectionFactory = queueConnectionFactory;
-		this.initialContext = iniialContext;
+		this.initialContext = initialContext;
 		this.queueName = queueName;
 	}
 
@@ -65,7 +65,8 @@ public class QueueConnectionHandler {
 	 */
 	public void connect() {
 		try {
-			queueConnection = queueConnectionFactory.createQueueConnection();
+			queueConnection = ((QueueConnectionFactory) queueConnectionFactory)
+					.createQueueConnection();
 			Queue queue = (Queue) initialContext.lookup(queueName);
 			queueSession = queueConnection.createQueueSession(true,
 					QueueSession.AUTO_ACKNOWLEDGE);
