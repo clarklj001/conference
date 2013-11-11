@@ -21,6 +21,9 @@ public class TalkServiceBean extends GenericCrudServiceBean<Talk> implements
 	@Inject
 	ConferenceService conferenceService;
 
+	@Inject
+	TalkJms talkJms;
+
 	public TalkServiceBean() {
 		super(Talk.class);
 	}
@@ -49,5 +52,14 @@ public class TalkServiceBean extends GenericCrudServiceBean<Talk> implements
 					+ ", " + confEndDatum + "]");
 		}
 		return super.isValid(t);
+	}
+
+	@Override
+	public Talk update(Talk t) {
+		Talk update = super.update(t);
+
+		talkJms.sendMessage("Talk with id " + t.getId() + " updated.");
+
+		return update;
 	}
 }
