@@ -60,3 +60,4 @@ Possible Improvements/Known Issues:
 * Bring to a server capable of JSF 2.2 (perhaps Wildfly)
 * Realize sending of Message with Decorator
 * Fix monitoring annotations
+* Release/Deployment description

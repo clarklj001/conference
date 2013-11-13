@@ -4,12 +4,15 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 
+import com.prodyna.conference.common.exception.ValidationException;
 import com.prodyna.conference.common.jmx.MBeanStartup;
 import com.prodyna.conference.common.jmx.PerformanceCollector;
 import com.prodyna.conference.common.jmx.PerformanceCollectorMXBean;
 import com.prodyna.conference.common.jmx.PerformanceEntry;
 import com.prodyna.conference.common.monitoring.Monitored;
 import com.prodyna.conference.common.monitoring.MonitoringInterceptor;
+import com.prodyna.conference.common.queue.QueueConnectionHandler;
+import com.prodyna.conference.common.queue.TalkUpdatedMessageBean;
 import com.prodyna.conference.model.AbstractIdHolder;
 import com.prodyna.conference.model.BeschreibungHolder;
 import com.prodyna.conference.model.Conference;
@@ -26,6 +29,7 @@ import com.prodyna.conference.service.RoomService;
 import com.prodyna.conference.service.RoomServiceBean;
 import com.prodyna.conference.service.SpeakerService;
 import com.prodyna.conference.service.SpeakerServiceBean;
+import com.prodyna.conference.service.TalkJms;
 import com.prodyna.conference.service.TalkService;
 import com.prodyna.conference.service.TalkServiceBean;
 import com.prodyna.conference.util.Resources;
@@ -34,10 +38,10 @@ public class AbstractArqTest {
 	public static Archive<?> createTestArchive() {
 		return ShrinkWrap
 				.create(WebArchive.class, "test.war")
-				.addClasses(BeschreibungHolder.class,
-						Conference.class, AbstractIdHolder.class,
-						IdHolder.class, NameHolder.class, Room.class,
-						Speaker.class, Talk.class, ConferenceServiceBean.class,
+				.addClasses(BeschreibungHolder.class, Conference.class,
+						AbstractIdHolder.class, IdHolder.class,
+						NameHolder.class, Room.class, Speaker.class,
+						Talk.class, ConferenceServiceBean.class,
 						ConferenceService.class, GenericCrudServiceBean.class,
 						GenericCrudService.class, RoomServiceBean.class,
 						RoomService.class, SpeakerServiceBean.class,
@@ -46,6 +50,9 @@ public class AbstractArqTest {
 						PerformanceCollector.class,
 						PerformanceCollectorMXBean.class,
 						PerformanceEntry.class, MonitoringInterceptor.class,
+						ValidationException.class,
+						QueueConnectionHandler.class,
+						TalkUpdatedMessageBean.class, TalkJms.class,
 						TalkService.class, Resources.class)
 				.addAsResource("META-INF/test-persistence.xml",
 						"META-INF/persistence.xml")

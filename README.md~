@@ -59,3 +59,4 @@ Possible Improvements/Known Issues:
 * Tests can cover more
 * Bring to a server capable of JSF 2.2 (perhaps Wildfly)
 * Realize sending of Message with Decorator
+* Fix monitoring annotations
