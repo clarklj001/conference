@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
 import javax.persistence.TypedQuery;
 
+import com.prodyna.conference.common.exception.ValidationException;
 import com.prodyna.conference.common.monitoring.Monitored;
 import com.prodyna.conference.common.monitoring.MonitoringInterceptor;
 import com.prodyna.conference.model.Conference;
@@ -57,7 +58,7 @@ public class ConferenceServiceBean extends GenericCrudServiceBean<Conference>
 		if (t.getAnfangsDatum().equals(t.getEndDatum())) {
 			// ok
 		} else if (t.getEndDatum().before(t.getAnfangsDatum())) {
-			throw new IllegalArgumentException("Conference Dates invalid: ["
+			throw new ValidationException("Conference Dates invalid: ["
 					+ t.getAnfangsDatum() + ", " + t.getEndDatum() + "]");
 		}
 		return super.isValid(t);

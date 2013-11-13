@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.interceptor.Interceptors;
 
+import com.prodyna.conference.common.exception.ValidationException;
 import com.prodyna.conference.common.monitoring.Monitored;
 import com.prodyna.conference.common.monitoring.MonitoringInterceptor;
 import com.prodyna.conference.model.Conference;
@@ -47,7 +48,7 @@ public class TalkServiceBean extends GenericCrudServiceBean<Talk> implements
 		if (confAnfangsDatum.after(talkStartDate)
 				|| confEndDatum.before(talkStartDate)) {
 			// not valid
-			throw new IllegalArgumentException(talkStartDate
+			throw new ValidationException(talkStartDate
 					+ " not within conference bounds: [" + confAnfangsDatum
 					+ ", " + confEndDatum + "]");
 		}

@@ -51,3 +51,12 @@ src/main/webapp/resources/gfx
 Graphics
 
 
+
+Possible Improvements/Known Issues:
+* Split conference-web into conference-web and conference-rest
+* Split conference-ejb into conference-ejb-intf & conference-ejb and conference-common, maybe split into 2 or more projects per entity (group)
+* MDB is not reacting as desired
+* Tests can cover more
+* Bring to a server capable of JSF 2.2 (perhaps Wildfly)
+* Realize sending of Message with Decorator
+* Fix monitoring annotations

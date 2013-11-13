@@ -45,7 +45,10 @@ public class MonitoringInterceptor {
 		String signature = signature(context);
 		logger.info(signature + ": duration=" + duration + " " + success);
 		getPerformanceCollector().addEntry(signature, duration, success);
-		if (toThrow != null) {
+		if (toThrow instanceof RuntimeException) {
+			// do nothing
+			throw (RuntimeException) toThrow;
+		} else if (toThrow != null) {
 			throw new RuntimeException(toThrow);
 		}
 		return result;
