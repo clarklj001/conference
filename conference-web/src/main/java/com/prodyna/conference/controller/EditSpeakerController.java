@@ -20,6 +20,8 @@ public class EditSpeakerController extends BasicController {
 	@Inject
 	SpeakerService speakerService;
 
+	private TalkListHelper talkListHelper;
+
 	@PostConstruct
 	void postConstruct() {
 		speaker = new Speaker();
@@ -76,17 +78,25 @@ public class EditSpeakerController extends BasicController {
 		}
 		return "speakers?faces-redirect=true";
 	}
-
+	
 	public List<Talk> getTalks() {
-		List<Talk> talks;
-		Long id = getId();
-		if (id != null && id > 0) {
-			speakerService.read(id);
-			talks = speakerService.listTalks(speaker);
+		List<Talk> listTalks;
+		Long speakerId = getSpeaker().getId();
+		if (speakerId != null) {
+			boolean set = false;
+			if (talkListHelper==null) {
+				set = true;
+			} else if (!speakerId.equals(talkListHelper.getId())) {
+				set = true;
+			}
+			if (set)  {
+				talkListHelper = new TalkListHelper(speakerService.listTalks(getSpeaker()), getSpeaker().getId());
+			}
+			listTalks = talkListHelper.getTalks();
 		} else {
-			talks = Collections.emptyList();
+			listTalks = Collections.emptyList();
 		}
-		return talks;
+		return listTalks;
 	}
 
 	public Converter getIdConverter() {

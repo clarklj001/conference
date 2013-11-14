@@ -33,6 +33,8 @@ public class EditConferenceController extends BasicController implements
 	@Inject
 	ConferenceService conferenceService;
 
+	private TalkListHelper talkListHelper;
+
 	public void doSave() {
 		try {
 			setConference(conferenceService.update(getConference()));
@@ -68,8 +70,18 @@ public class EditConferenceController extends BasicController implements
 
 	public List<Talk> getTalks() {
 		List<Talk> listTalks;
-		if (getConference().getId() != null) {
-			listTalks = conferenceService.listTalks(getConference());
+		Long confId = getConference().getId();
+		if (confId != null) {
+			boolean set = false;
+			if (talkListHelper==null) {
+				set = true;
+			} else if (!confId.equals(talkListHelper.getId())) {
+				set = true;
+			}
+			if (set)  {
+				talkListHelper = new TalkListHelper(conferenceService.listTalks(getConference()), getConference().getId());
+			}
+			listTalks = talkListHelper.getTalks();
 		} else {
 			listTalks = Collections.emptyList();
 		}
@@ -77,9 +89,10 @@ public class EditConferenceController extends BasicController implements
 	}
 
 	public List<Date> getDates() {
+		getTalks();
 		List<Date> listDates;
-		if (getConference().getId() != null) {
-			listDates = conferenceService.listDates(getConference());
+		if (talkListHelper!=null) {
+			listDates = talkListHelper.getDates();
 		} else {
 			listDates = Collections.emptyList();
 		}
@@ -87,7 +100,7 @@ public class EditConferenceController extends BasicController implements
 	}
 
 	public List<Talk> talksForDate(Date date) {
-		return conferenceService.listTalksForDate(getConference(), date);
+		return talkListHelper.getTalksForDate(date);
 	}
 
 	public Conference getConference() {

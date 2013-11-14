@@ -22,6 +22,8 @@ public class EditRoomController extends BasicController {
 
 	Room room;
 
+	private TalkListHelper talkListHelper;
+
 	@PostConstruct
 	void postConstruct() {
 		room = new Room();
@@ -78,12 +80,32 @@ public class EditRoomController extends BasicController {
 		this.room = room;
 		return "editRoom";
 	}
+	
+	private List<Talk> getTalks() {
+		List<Talk> listTalks;
+		Long roomId = getRoom().getId();
+		if (roomId != null) {
+			boolean set = false;
+			if (talkListHelper==null) {
+				set = true;
+			} else if (!roomId.equals(talkListHelper.getId())) {
+				set = true;
+			}
+			if (set)  {
+				talkListHelper = new TalkListHelper(roomService.listRoomTalks(getRoom()), getRoom().getId());
+			}
+			listTalks = talkListHelper.getTalks();
+		} else {
+			listTalks = Collections.emptyList();
+		}
+		return listTalks;
+	}
 
 	public List<Date> getDates() {
 		List<Date> result;
-		if (getId() != null && getId() > 0) {
-			Room read = roomService.read(getId());
-			result = roomService.listRoomDates(read);
+		getTalks();
+		if (talkListHelper!=null) {
+			result = talkListHelper.getDates();
 		} else {
 			result = Collections.emptyList();
 		}
@@ -91,7 +113,7 @@ public class EditRoomController extends BasicController {
 	}
 
 	public List<Talk> getRoomTalks(Date d) {
-		return roomService.listRoomTalksAtDate(room, d);
+		return talkListHelper.getTalksForDate(d);
 	}
 
 	public Converter getIdConverter() {

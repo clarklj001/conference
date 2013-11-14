@@ -30,7 +30,7 @@ public class TalkJms {
 	/**
 	 * Queue connection factory.
 	 */
-	@Resource(lookup = "java:/ConnectionFactory")
+	@Resource(mappedName = "java:/ConnectionFactory")
 	private ConnectionFactory queueConnectionFactory;
 
 	/**
