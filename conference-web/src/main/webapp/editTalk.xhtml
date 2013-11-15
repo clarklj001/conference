@@ -11,25 +11,41 @@
 	<ui:define name="content">
 		<h:form id="edittalk">
 			<f:metadata>
-				<f:viewParam name="id" value="#{editTalkController.talk}" converter="#{editTalkController.idConverter}" required="false"></f:viewParam>
+				<f:viewParam name="id" value="#{editTalkController.talk}"
+					converter="#{editTalkController.idConverter}" required="false"></f:viewParam>
 			</f:metadata>
 			<custom:inputnamekurzbeschreibung model="#{editTalkController.talk}"></custom:inputnamekurzbeschreibung>
 			<h:inputHidden value="#{editTalkController.talk.conference.id}" />
-			<h:outputLabel for="room" value="Room" />
-			<h:selectOneMenu id="room" value="#{editTalkController.roomId}">
-				<f:selectItems value="#{roomController.rooms}" var="room" itemLabel="#{room.name} (#{room.capazitaet})" itemValue="#{room.id}"></f:selectItems>
-			</h:selectOneMenu>
-			<p/>
-			<h:outputLabel for="speakers" value="Speakers" />
-			<h:selectManyListbox id="speakers" value="#{editTalkController.speakerIds}" >
-				<f:selectItems value="#{speakerController.speakers}" var="speaker" itemLabel="#{speaker.name}" itemValue="#{speaker.id}">
-				</f:selectItems>
-			</h:selectManyListbox>
-			<p/>
-			<custom:inputDatetime label="StartDate" value="#{editTalkController.talk.startDate}" time="true"/>
+			<h:panelGroup rendered="#{securityController.loggedIn}">
+				<h:outputLabel for="room" value="Room" />
+				<h:selectOneMenu id="room" value="#{editTalkController.roomId}">
+					<f:selectItems value="#{roomController.rooms}" var="room"
+						itemLabel="#{room.name} (#{room.capazitaet})"
+						itemValue="#{room.id}"></f:selectItems>
+				</h:selectOneMenu>
+				<p />
+				<h:outputLabel for="speakers" value="Speakers" />
+				<h:selectManyListbox id="speakers"
+					value="#{editTalkController.speakerIds}">
+					<f:selectItems value="#{speakerController.speakers}" var="speaker"
+						itemLabel="#{speaker.name}" itemValue="#{speaker.id}">
+					</f:selectItems>
+				</h:selectManyListbox>
+			</h:panelGroup>
+			<h:panelGroup rendered="#{!securityController.loggedIn}">
+				<custom:outputRoom room="#{editTalkController.talk.room}"/>
+				<ui:repeat var="speaker" value="#{editTalkController.talk.speakers}">
+					<custom:outputSpeaker speaker="${speaker}"/>
+				</ui:repeat>
+				<p />
+				
+			</h:panelGroup>
+			<p />
+			<custom:inputDatetime label="StartDate"
+				value="#{editTalkController.talk.startDate}" time="true" />
 			<h:outputLabel for="dauer" value="Dauer [Minuten]" />
 			<h:inputText id="dauer" value="#{editTalkController.talk.dauer}" />
-			<custom:commandSaveButton model="#{editTalkController}"/>
+			<custom:commandSaveButton model="#{editTalkController}" />
 			<h:messages />
 		</h:form>
 	</ui:define>
