@@ -16,7 +16,7 @@
 			</f:metadata>
 			<custom:inputnamekurzbeschreibung model="#{editTalkController.talk}"></custom:inputnamekurzbeschreibung>
 			<h:inputHidden value="#{editTalkController.talk.conference.id}" />
-			<h:panelGroup rendered="#{securityController.loggedIn}">
+			<h:panelGroup type="block" rendered="#{securityController.loggedIn}">
 				<h:outputLabel for="room" value="Room" />
 				<h:selectOneMenu id="room" value="#{editTalkController.roomId}">
 					<f:selectItems value="#{roomController.rooms}" var="room"
@@ -32,19 +32,25 @@
 					</f:selectItems>
 				</h:selectManyListbox>
 			</h:panelGroup>
-			<h:panelGroup rendered="#{!securityController.loggedIn}">
-				<custom:outputRoom room="#{editTalkController.talk.room}"/>
+			<h:panelGroup type="block" rendered="#{!securityController.loggedIn}">
+				<custom:outputRoom room="#{editTalkController.talk.room}" />
 				<ui:repeat var="speaker" value="#{editTalkController.talk.speakers}">
-					<custom:outputSpeaker speaker="${speaker}"/>
+					<custom:outputSpeaker speaker="${speaker}" />
 				</ui:repeat>
 				<p />
-				
+
 			</h:panelGroup>
 			<p />
 			<custom:inputDatetime label="StartDate"
 				value="#{editTalkController.talk.startDate}" time="true" />
-			<h:outputLabel for="dauer" value="Dauer [Minuten]" />
-			<h:inputText id="dauer" value="#{editTalkController.talk.dauer}" />
+			<h:panelGroup type="block" rendered="#{securityController.loggedIn}">
+
+				<h:outputLabel for="dauer" value="Dauer [Minuten]" />
+				<h:inputText id="dauer" value="#{editTalkController.talk.dauer}" />
+			</h:panelGroup>
+			<h:panelGroup type="block" rendered="#{!securityController.loggedIn}">
+				<h:outputText value="Dauer [Minuten]: #{editTalkController.talk.dauer}" />
+			</h:panelGroup>
 			<custom:commandSaveButton model="#{editTalkController}" />
 			<h:messages />
 		</h:form>
