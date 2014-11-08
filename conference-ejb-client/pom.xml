@@ -21,7 +21,7 @@
 
 	<artifactId>conference-ejb-client</artifactId>
 
-	<name>conference: EJB Module</name>
+	<name>conference: EJB Client Module</name>
 
 	<url>http://jboss.org/jbossas</url>
 	<licenses>
