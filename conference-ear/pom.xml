@@ -50,6 +50,10 @@
             <artifactId>conference-ejb</artifactId>
             <type>ejb</type>
         </dependency>
+        <dependency>
+        	<groupId>com.prodyna.conference</groupId>
+        	<artifactId>conference-ejb-client</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

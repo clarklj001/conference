@@ -84,6 +84,15 @@
 				<version>${project.version}</version>
 				<type>ejb</type>
 			</dependency>
+			
+			<!-- Define the version of the EJB jar so that we don't need to repeat 
+				ourselves in every module -->
+			<dependency>
+				<groupId>com.prodyna.conference</groupId>
+				<artifactId>conference-ejb-client</artifactId>
+				<version>${project.version}</version>
+				<type>jar</type>
+			</dependency>
 
 			<!-- Define the version of the WAR so that we don't need to repeat ourselves 
 				in every module -->

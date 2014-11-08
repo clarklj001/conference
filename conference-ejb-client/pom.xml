@@ -20,7 +20,6 @@
 	</parent>
 
 	<artifactId>conference-ejb-client</artifactId>
-	<packaging>ejb</packaging>
 
 	<name>conference: EJB Module</name>
 
