@@ -19,7 +19,7 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>conference-ejb</artifactId>
+	<artifactId>conference-ejb-client</artifactId>
 	<packaging>ejb</packaging>
 
 	<name>conference: EJB Module</name>
@@ -100,12 +100,6 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>com.prodyna.conference</groupId>
-			<artifactId>conference-ejb-client</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<type>ejb</type>
-		</dependency>
 	</dependencies>
 
 	<build>

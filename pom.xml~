@@ -27,7 +27,6 @@
 		</license>
 	</licenses>
 	<modules>
-		<module>conference-ejb-client</module>
 		<module>conference-ejb</module>
 		<module>conference-web</module>
 		<module>conference-ear</module>
